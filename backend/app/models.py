@@ -1,5 +1,6 @@
+from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, Date, ForeignKey, Integer, LargeBinary, String, Table
+from sqlalchemy import create_engine, Column, DateTime, ForeignKey, Integer, LargeBinary, String, Table
 from sqlalchemy.orm import relationship
 import os
 
@@ -14,7 +15,7 @@ def dump_date(value):
     """Deserialize datetime object into string form for JSON processing."""
     if value is None:
         return None
-    return [value.strftime("%Y-%m-%d")]
+    return value.strftime("%m/%d/%Y, %H:%M:%S")
 
 class User(Base):
     """The User class corresponds to the "users" database table.
@@ -43,22 +44,22 @@ class Resume(Base):
     """
     __tablename__ = 'resume'
     id      = Column(Integer, primary_key=True)
-    file    = Column(LargeBinary)
     user_id = Column(Integer, ForeignKey('users.id'))
-    timestamp = Column(Date)
+    created_at = Column(DateTime, default=datetime.now())
+    updated_at = Column(DateTime, default=datetime.now())
 
-    def __init__(self, id, file, timestamp):
-        self.id = id
-        self.file = file
-        self.timestamp = timestamp
+    def __init__(self, created_at, user_id):
+        self.created_at = created_at
+        self.user_id = user_id
         pass
 
     @property
     def serialize(self):
         return {
             'id'         : self.id,
-            'file'       : self.file,
-            'timestamp'   : dump_date(self.timestamp)
+            'user_id'    : self.user_id,
+            'created_at'  : dump_date(self.created_at),
+            'updated_at'  : dump_date(self.updated_at)
         }
 
 

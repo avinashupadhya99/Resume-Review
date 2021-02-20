@@ -1,8 +1,12 @@
 from app import app
 import json
-from app.database import create_users, get_users, get_user_by_id
+from app.database import add_resume, create_users, get_users, get_user_by_id
+from app.s3 import download_file, upload_file
 from flask import jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
+
+UPLOAD_FOLDER = "uploads"
+BUCKET = "resume-reviewer-hackathon"
 
 @app.route('/')
 def index():
@@ -17,6 +21,7 @@ def users():
 @app.route('/user/<int:id>')
 def get_user(id):
     user = get_user_by_id(id)
+    print(user.resume)
     return jsonify(user.serialize)
 
 @app.route('/users/new', methods=['POST'])
@@ -38,3 +43,18 @@ def new_users():
     #     print(e)
     #     msg = "Internal error while creating new user"
     #     return jsonify({"error": msg}), 500
+
+@app.route('/resume/add', methods=['POST'])
+def resume_add():
+    resume_file = request.files['file']
+    user_id = request.form['user_id']
+    f = request.files['file']
+    resume_file.save(f"{UPLOAD_FOLDER}/{user_id}.pdf")
+    upload_file(f"{UPLOAD_FOLDER}/{user_id}.pdf", BUCKET)
+
+    try:
+        resume = add_resume(user_id)
+        return jsonify(resume.serialize)
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        return jsonify({"error": error}), 420

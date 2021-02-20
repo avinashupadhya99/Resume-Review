@@ -3,3 +3,4 @@ gunicorn
 sqlalchemy
 sqlalchemy-cockroachdb
 psycopg2
+boto3
