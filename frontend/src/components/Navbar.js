@@ -2,6 +2,10 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
 
+/*
+Test
+*/
+
 /**
  * you can change the css to match the figma. i scrapped my progress and followed a tutorial just to get the links working first bc i wasted at least an hour on that
  * overall link structure should be okay
