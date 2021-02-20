@@ -11,9 +11,14 @@
 }
 
 body {
-  overflow: hidden;
+  /*overflow: hidden;*/
   background-color: #E6CCB2
   /* Hide scrollbars */
+}
+
+textarea {
+  resize: none;
+  outline: none;
 }
 
 /* NAVBAR */
@@ -31,6 +36,7 @@ body {
   margin: 0 auto;
   border-bottom: 5px solid rgb(173, 150, 107);
   background-color: rgb(20, 20, 20);
+  z-index: 999;
 }
 
 .navbar h1 {
@@ -124,5 +130,20 @@ input:hover+label {
 }
 
 .pdf {
-  width: 30%;
+  width: 100px;
+  height: 100px;
+}
+
+.view-btns {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+form {
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
 }
