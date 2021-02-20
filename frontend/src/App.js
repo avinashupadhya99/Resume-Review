@@ -11,6 +11,9 @@ import List from "./pages/List";
  * Navbar and content to display should be complete in this file basically but we still have to store all of the states in here
  */
 
+/**
+ * hi khiem
+ */
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
