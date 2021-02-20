@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, Date, ForeignKey, Integer, String, Table
+from sqlalchemy import create_engine, Column, Date, ForeignKey, Integer, LargeBinary, String, Table
 from sqlalchemy.orm import relationship
 import os
 
@@ -23,9 +23,9 @@ class User(Base):
     id      = Column(Integer, primary_key=True)
     name    = Column(String(75))       
     email = Column(String(50), unique=True)
+    resume = relationship("Resume", uselist=False, backref="users")
 
-    def __init__(self, id, name, email, password):
-        self.id = id
+    def __init__(self, name, email):
         self.name = name
         self.email = email
         pass
@@ -36,6 +36,29 @@ class User(Base):
             'id'         : self.id,
             'name'       : self.name,
             'email'      : self.email
+        }
+
+class Resume(Base):
+    """The Resume class corresponds to the "resume" database table.
+    """
+    __tablename__ = 'resume'
+    id      = Column(Integer, primary_key=True)
+    file    = Column(LargeBinary)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    timestamp = Column(Date)
+
+    def __init__(self, id, file, timestamp):
+        self.id = id
+        self.file = file
+        self.timestamp = timestamp
+        pass
+
+    @property
+    def serialize(self):
+        return {
+            'id'         : self.id,
+            'file'       : self.file,
+            'timestamp'   : dump_date(self.timestamp)
         }
 
 

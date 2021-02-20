@@ -25,3 +25,11 @@ def get_user_by_id(id):
     user = session.query(User).get(id)
     return user
 
+def create_users(user):
+    factory = sessionmaker(bind=engine)
+    session = factory()
+    new_user = User(name=user['name'], email=user['email'])
+    session.add(new_user)
+    session.commit()
+    return new_user
+
