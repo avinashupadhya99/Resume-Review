@@ -15,20 +15,36 @@ import List from "./pages/List";
  * hi khiem
  */
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSuccessfulLogin = (res) => {
     console.log("Login Success! Current User: ", res.profileObj);
+    setCurrentUser(res.profileObj);
+    setLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser({});
+    setLoggedIn(false);
+    console.log("Successfully logged out.");
   };
 
   const handleFailedLogin = (res) => {
     console.log("Login Failed: ", res);
+    setLoggedIn(false);
   };
 
   return (
     <Router>
       <div className="App">
-        <Navbar onSuccessfulLogin={handleSuccessfulLogin} />
+        <Navbar
+          onSuccessfulLogin={handleSuccessfulLogin}
+          onLogOut={handleLogout}
+          user={currentUser}
+          loggedIn={loggedIn}
+        />
+        {/* <p> {currentUser.googleId} </p> */}
         <div className="content">
           <Switch>
             <Route exact path="/" component={Home}></Route>
