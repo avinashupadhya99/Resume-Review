@@ -1,6 +1,6 @@
 from app import app
 import json
-from app.database import add_resume, create_users, get_users, get_user_by_id
+from app.database import add_resume, create_review, create_users, get_users, get_user_by_id
 from app.s3 import download_file, upload_file
 from flask import jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
@@ -55,6 +55,22 @@ def resume_add():
     try:
         resume = add_resume(user_id)
         return jsonify(resume.serialize)
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        return jsonify({"error": error}), 420
+
+@app.route('/review/new', methods=['POST'])
+def new_review():
+    try:
+        body = request.json
+        print(body)
+    except:
+        msg = "payload must be a valid json"
+        return jsonify({"error": msg}), 400
+
+    try:
+        new_review = create_review(body)
+        return jsonify(new_review.serialize)
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
         return jsonify({"error": error}), 420

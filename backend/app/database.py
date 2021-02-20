@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from app.models import Resume, User
+from app.models import Resume, Review, User
 
 Base = declarative_base()
 
@@ -29,7 +29,7 @@ def get_user_by_id(id):
 def create_users(user):
     factory = sessionmaker(bind=engine)
     session = factory()
-    new_user = User(name=user['name'], email=user['email'])
+    new_user = User(id=user['id'], auth_provider=user['auth_provider'])
     session.add(new_user)
     session.commit()
     return new_user
@@ -48,4 +48,12 @@ def add_resume(user_id):
         existing_resume.updated_at = datetime.now()
     session.commit()
     return existing_resume if existing_resume is not None else new_resume
+
+def create_review(review):
+    factory = sessionmaker(bind=engine)
+    session = factory()
+    new_review = Review(user_id=review['user_id'], resume_id=review['resume_id'], review=review['review'], created_at=datetime.now())
+    session.add(new_review)
+    session.commit()
+    return new_review
 
