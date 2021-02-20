@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Home screen, you can honestly change whatever
+ */
 const Home = () => {
   return (
     <div className="home">

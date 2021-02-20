@@ -2,7 +2,8 @@ import React from "react";
 import sampleresume from "../images/sampleresume.jpg";
 
 /**
- * view a specific resume and all comments, timestamp from database
+ * view a specific resume with all comments below and timestamp + details to the side maybe
+ * probably have to pass in an object representing the resume to the props
  */
 
 const View = () => {
