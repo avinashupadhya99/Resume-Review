@@ -35,7 +35,7 @@ class User(Base):
     def serialize(self):
         return {
             'id'         : self.id,
-            'provider'   : self.provider
+            'auth_provider'   : self.auth_provider
         }
 
 class Resume(Base):
