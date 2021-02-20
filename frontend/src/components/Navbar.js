@@ -2,9 +2,7 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
 
-/*
-Test
-*/
+import logo from '../images/logo.png'
 
 /**
  * you can change the css to match the figma. i scrapped my progress and followed a tutorial just to get the links working first bc i wasted at least an hour on that
@@ -21,18 +19,31 @@ const Navbar = ({ onSuccessfulLogin }) => {
   return (
     <nav className="navbar">
       <Link className="navbar-title" to="/">
-        Resume Review
+        <img src={logo} width="170" height="40"/>
       </Link>
       <div className="links">
         <Link to="/upload"> Upload New Resume </Link>
-        <Link to="/list"> View Resumes</Link>
-        <GoogleLogin
+        <Link to="/list">View Resumes</Link>
+        <GoogleLogin className="google-login"
           clientId={CLIENT_ID}
           buttonText="Login"
           onSuccess={onSuccessfulLogin}
           onFailure={onLoginFailure}
           cookiePolicy={"single_host_origin"}
           isSignedIn={true}
+          
+          render={renderProps => (
+            <button onClick={renderProps.onClick} style={{
+              backgroundColor: "black", 
+              color: "white",
+              borderRadius: "2px",
+              padding: "10px",
+              cursor: "pointer",
+              border: '1px solid rgba(255, 255, 255, 1)',
+              width: '100px'
+            }}>Login</button>
+          )}
+          
         />
         {/* <Link
           style={{
