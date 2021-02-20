@@ -9,9 +9,11 @@ import ResumeUpload from "./pages/ResumeUpload";
 function App() {
   return (
     <Router basename="/">
-      <div>
-        <nav className="navbar">
-          <span>Resume Review</span>
+      <nav className="navbar navbar-light bg-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            Resume Reviewer
+          </a>
           <ul>
             <li>
               <Link to="/" exact>
@@ -27,8 +29,8 @@ function App() {
             </li>
           </ul>
           <button className="login">Log In</button>
-        </nav>
-      </div>
+        </div>
+      </nav>
 
       <Switch>
         <Route path="/feedback" exact component={ResumeFeedback}></Route>
