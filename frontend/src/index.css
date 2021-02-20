@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  color: #333;
+}
+
+.navbar-title {
+  font-size: x-large;
+}
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 80%;
+  margin: 0 auto;
+  border-bottom: 1px solid #000000;
+}
+
+.navbar h1 {
+  color: #f1356d;
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+
+.navbar a:hover {
+  color: #f1356d;
+}
+
+.content {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.error {
+  justify-content: center;
+}
+
+.pdf {
+  width: 30%;
+}
