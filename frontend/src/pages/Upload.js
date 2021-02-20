@@ -6,6 +6,7 @@ import React from "react";
  * have to take the file upload and pass it to the database
  */
 
+
 const Upload = () => {
   const onChangeHandler = (e) => {
     console.log(e.target.files[0]);
@@ -13,7 +14,9 @@ const Upload = () => {
   return (
     <div className="upload">
       <h1>Upload New Resume</h1>
-      <input type="file" name="file" onChange={onChangeHandler} />
+      <br/>
+      <input type="file" name="file" class="file" id="file" onChange={onChangeHandler} style={{display: 'none'}} />
+      <label for="file">Select File</label>
     </div>
   );
 };
