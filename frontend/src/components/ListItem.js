@@ -4,11 +4,20 @@ import { Link } from "react-router-dom";
 const ListItem = ({ resume }) => {
   console.log("[ListItem.js] data", resume);
   return (
-    <div>
-      <h1>{resume.title}</h1>
-      <p>{resume.description}</p>
-      <h6>{resume.timestamp}</h6>
-      <Link to={`/view/${resume.id}`}> View Resume</Link>
+    <div id="item-list">
+      <div className="search"></div>
+      <ul>
+        <li>
+          <div className="expand">
+            <div className="icon london"></div>
+            <h2 className="list-title">{resume.title}</h2>
+            <span>{resume.description}</span>
+            <Link className="button" to={`/view/${resume.id}`}>
+              View Resume
+            </Link>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 };

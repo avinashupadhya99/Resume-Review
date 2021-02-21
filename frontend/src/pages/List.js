@@ -12,6 +12,7 @@ const List = ({ resumePostList }) => {
   return (
     <div className="list">
       <div className="pad"></div>
+
       <section className="items">
         {resumePostList.map((resume, i) => (
           <ListItem key={i} resume={resume} />

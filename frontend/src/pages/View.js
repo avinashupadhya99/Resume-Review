@@ -21,14 +21,13 @@ import CommentSection from "../components/CommentSection";
 
 const View = ({ onNewComment, getResume }) => {
   let { id } = useParams();
-
   const resume = getResume(id);
   console.log(resume);
   return (
     <div className="view">
       <div className="pad"></div>
-      {/** need the database before we can fill */}
-      <h1>Resume #{id}</h1>
+      <h1 className="resume-title">{resume.title}</h1>
+      <h1 className="resume-subtitle">Resume #{id}</h1>
       <Magnifier
         id="pdf"
         imageSrc={sampleresume}
