@@ -28,10 +28,11 @@ const Navbar = ({
             <button
               onClick={onLogOut}
               style={{
-                backgroundColor: "black",
+                backgroundColor: "#3d405b",
                 color: "white",
                 borderRadius: "2px",
                 padding: "10px",
+                margin: "20px",
                 cursor: "pointer",
                 border: "1px solid rgba(255, 255, 255, 1)",
                 width: "100px",
@@ -53,10 +54,11 @@ const Navbar = ({
               <button
                 onClick={renderProps.onClick}
                 style={{
-                  backgroundColor: "black",
+                  backgroundColor: "#3d405b",
                   color: "white",
                   borderRadius: "2px",
                   padding: "10px",
+                  margin: "20px",
                   cursor: "pointer",
                   border: "1px solid rgba(255, 255, 255, 1)",
                   width: "100px",
