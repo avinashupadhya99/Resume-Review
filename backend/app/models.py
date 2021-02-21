@@ -11,6 +11,12 @@ engine = create_engine(
     echo=True                   # Log SQL queries to stdout
 )
 
+i = 0
+def mydefault():
+    global i
+    i += 1
+    return i
+
 def dump_date(value):
     """Deserialize datetime object into string form for JSON processing."""
     if value is None:
@@ -42,7 +48,7 @@ class Resume(Base):
     """The Resume class corresponds to the "resume" database table.
     """
     __tablename__ = 'resume'
-    id      = Column(Integer, primary_key=True)
+    id      = Column(Integer, primary_key=True, default=mydefault)
     user_id = Column(Integer, ForeignKey('user.id'), unique=True)
     title = Column(String(50))
     description = Column(String(150))
