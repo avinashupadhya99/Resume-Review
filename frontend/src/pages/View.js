@@ -27,7 +27,8 @@ const View = ({ onNewComment, getResume }) => {
     <div className="view">
       <div className="pad"></div>
       <h1 className="resume-title">{resume.title}</h1>
-      <h1 className="resume-subtitle">Resume #{id}</h1>
+      <h1 className="resume-subtitle">Resume ID: {id}</h1>
+      <p className="resume-desc">{resume.description}</p>
       <Magnifier
         id="pdf"
         imageSrc={sampleresume}
