@@ -35,7 +35,6 @@ def create_users(user):
     return new_user
 
 def add_resume(resume):
-    print(resume['tags'])
     factory = sessionmaker(bind=engine)
     session = factory()
     # Query to find if there is an existing resume record for the user
