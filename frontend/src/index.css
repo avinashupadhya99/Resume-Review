@@ -138,8 +138,10 @@ form {
   max-width: 100%;
 }
 
-.error {
-  justify-content: center;
+.error > h1 {
+  margin-left: 40%;
+  margin-top: 20%;
+  color: black;
 }
 
 /* View */
@@ -172,6 +174,7 @@ form {
 
 #item-list {
   color: black;
+  margin-top: 8px;
 }
 
 #item-list ul {
