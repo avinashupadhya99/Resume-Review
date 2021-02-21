@@ -88,14 +88,6 @@ const App = () => {
      */
   };
 
-  const handleNewComment = (resume) => {
-    /**
-     * TODO
-     * add comment into resume post in database
-     */
-    console.log("[App.js] New comment recieved");
-  };
-
   return (
     <Router>
       <div className="App">
@@ -120,9 +112,7 @@ const App = () => {
             <Route
               path="/view/:id"
               render={() => (
-                <View
-                  onNewComment={handleNewComment}
-                />
+                <View />
               )}
             ></Route>
             <Route component={Invalid}></Route>
