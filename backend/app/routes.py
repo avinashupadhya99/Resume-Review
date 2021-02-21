@@ -1,6 +1,6 @@
 from app import app
 import json
-from app.database import add_resume, create_review, create_users, get_users, get_user_by_id
+from app.database import add_resume, create_review, create_users, get_resumes, get_users, get_user_by_id
 from app.s3 import download_file, upload_file
 from flask import jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
@@ -74,3 +74,12 @@ def new_review():
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
         return jsonify({"error": error}), 420
+
+@app.route('/resumes')
+def resumes():
+    resumes = get_resumes()
+
+    for resume in resumes:
+        print(resume.review)
+
+    return jsonify([i.serialize for i in resumes])

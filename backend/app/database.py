@@ -52,8 +52,20 @@ def add_resume(user_id):
 def create_review(review):
     factory = sessionmaker(bind=engine)
     session = factory()
-    new_review = Review(user_id=review['user_id'], resume_id=review['resume_id'], review=review['review'], created_at=datetime.now())
-    session.add(new_review)
-    session.commit()
-    return new_review
+    user = session.query(User).get(review['user_id'])
+    resume = session.query(Resume).get(review['resume_id'])
+    if user is not None and resume is not None:
+        new_review = Review(review=review['review'])
+        user.reviews.append(new_review)
+        resume.reviews.append(new_review)
+        session.add(new_review)
+        session.commit()
+        return new_review
+    else:
+        raise Exception("Either user or resume record not found")
 
+def get_resumes():
+    factory = sessionmaker(bind=engine)
+    session = factory()
+    resumes = session.query(Resume).all()
+    return resumes

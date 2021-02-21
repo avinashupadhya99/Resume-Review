@@ -73,10 +73,7 @@ class Review(Base):
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, default=datetime.now())
 
-    def __init__(self, created_at, user_id, resume_id, review):
-        self.created_at = created_at
-        self.user_id = user_id
-        self.resume_id = resume_id
+    def __init__(self, review):
         self.review = review
         pass
 
