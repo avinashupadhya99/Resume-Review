@@ -111,13 +111,13 @@ const View = ({ onNewComment, getResume }) => {
         <br />
         <br />
         <br />
-        {resume.comments.map((data, i) => (
+
+        {/* {resume.comments.map((data, i) => (
           <Comment key={i} comment={data} />
-        ))}
+        ))} */}
       </div>
     );
   } else {
-    return <>Loading</>
     return <>Loading</>;
   }
 };
