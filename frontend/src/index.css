@@ -129,7 +129,7 @@ form {
   transition: transform 0.2s ease-out;
 }
 
-.upload>label:hover {
+.upload > label:hover {
   transform: scale(1.02);
 }
 
@@ -186,7 +186,7 @@ form {
   text-align: center;
 }
 
-#item-list ul>li {
+#item-list ul > li {
   list-style: none;
   border: 3px solid #ddd;
   display: block;
@@ -236,4 +236,25 @@ span {
   color: black;
   margin: 0 33%;
   font-size: 20px;
+}
+
+.resume-desc {
+  color: black;
+  margin: 0 33%;
+  font-size: 15px;
+}
+
+.comment-box {
+  width: 50%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 25%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+
+.comment-box > p {
+  color: black;
+  text-align: center;
 }

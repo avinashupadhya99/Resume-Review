@@ -8,12 +8,14 @@ import { Magnifier } from "react-image-magnifiers";
 import Comment from "../components/Comment";
 
 
+
 const View = ({ getResume }) => {
   const [resume, setResume] = useState(null);
   const [comment, setComment] = useState("");
   let { id } = useParams();
-  
+
   useEffect(() => {
+
     axios.get(`http://104.211.49.83/resume/${id}/details`).then((res) => {
       console.log(res.data);
       const resume_details = res.data;
@@ -62,6 +64,7 @@ const View = ({ getResume }) => {
 
   };
   if(resume) {
+
     return (
       <div className="view">
         <div className="pad"></div>
@@ -152,11 +155,14 @@ const View = ({ getResume }) => {
         <br />
         <br />
 
+        {/* {resume.comments.map((data, i) => (
+          <Comment key={i} comment={data} />
+        ))} */}
       </div>
     );
 
   } else {
-    return <>Loading</>
+    return <>Loading</>;
   }
 };
 
