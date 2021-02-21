@@ -6,19 +6,24 @@ import Invalid from "./pages/Invalid";
 import Navbar from "./components/Navbar";
 import Upload from "./pages/Upload";
 import List from "./pages/List";
+import axios from "axios";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [resumePosts, setResumePosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  /**
-   * TODO
-   * use axios or fetch to get database
-   * populate resumePost objects
-   */
-  useEffect(() => {}, []);
+  // const data = {
+  //   id: 1234,
+  //   auth_provider: "Google",
+  // };
+  // useEffect(() => {
+  //   axios.get(`http://104.211.49.83/users/new`).then((res) => {
+  //     console.log(res.data);
+  //   });
+  // }, []);
 
   const dummyResumeList = [
     {
@@ -26,18 +31,15 @@ const App = () => {
       title: "3rd year grad student at UCLA",
       description: "Hey! I'm looking for feedback on my resume",
       tags: ["premed", "bio", "research"],
-      // timestamp: new Date(),
       userId: 2,
       id: 5,
       comments: [
         {
           userId: 1,
-          // timestamp: new Date(),
           text: "there's too much whitespace",
         },
         {
           userId: 3,
-          // timestamp: new Date(),
           text: "use less bullet points",
         },
       ],
@@ -59,7 +61,6 @@ const App = () => {
       ],
     },
   ];
-  console.log("[App.js] Resume Posts List in App.js:", dummyResumeList);
 
   const handleSuccessfulLogin = (res) => {
     setCurrentUser(res.profileObj);

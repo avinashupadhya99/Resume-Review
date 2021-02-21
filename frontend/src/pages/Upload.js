@@ -10,7 +10,6 @@ const Upload = ({ onSubmit }) => {
   const onChangeFile = (e) => {
     const new_file = e.target.files[0];
     console.log(new_file);
-    if (new_file !== null) setFile(e.target.files[0]);
   };
 
   return (
@@ -27,7 +26,7 @@ const Upload = ({ onSubmit }) => {
         style={{ display: "none" }}
       />
       <label htmlFor="file">Select File</label>
-      <img src={file} alt="" />
+      <h2>{file}</h2>
 
       <br />
       <br />
