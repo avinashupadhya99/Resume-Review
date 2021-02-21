@@ -17,8 +17,6 @@ const List = ({ resumePostList }) => {
           <ListItem key={i} resume={resume} />
         ))}
       </section>
-
-      <Link to="/view/5">View Resume #1</Link>
     </div>
   );
 };
