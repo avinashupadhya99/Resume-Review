@@ -34,20 +34,6 @@ const View = () => {
       <h1>Resume #1</h1>
       <h1>{id}</h1>
       <SideBySideMagnifier
-<<<<<<< Updated upstream
-      id="pdf" imageSrc={sampleresume} imageAlt="Example" style={{ width: "500px", display: "block", marginLeft: "auto", marginRight:"auto", transform: "translateY(10%)" }} />
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-
-      <form>
-        <textarea id="comment" placeholder="Leave a comment" style={{color:"black", width:"500px", height:"100px", display: "block", marginLeft: "auto", marginRight:"auto", fontSize:"20px", borderRadius: "10px", padding: "10px" }}>
-
-=======
         id="pdf"
         imageSrc={sampleresume}
         imageAlt="Example"
@@ -56,11 +42,9 @@ const View = () => {
           display: "block",
           marginLeft: "auto",
           marginRight: "auto",
-          transform: "translateY(20%)",
+          transform: "translateY(10%)",
         }}
       />
-      <br />
-      <br />
       <br />
       <br />
       <br />
@@ -72,6 +56,7 @@ const View = () => {
       <form>
         <textarea
           id="comment"
+          placeholder="Leave a comment"
           style={{
             color: "black",
             width: "500px",
@@ -80,77 +65,50 @@ const View = () => {
             marginLeft: "auto",
             marginRight: "auto",
             fontSize: "20px",
-            borderRadius: "20px",
+            borderRadius: "10px",
             padding: "10px",
           }}
-        >
-          Leave a comment
->>>>>>> Stashed changes
-        </textarea>
+        ></textarea>
       </form>
 
       <br />
       <br />
 
       <div className="view-btns">
-<<<<<<< Updated upstream
-      <input type="submit" value="Submit" style={{
-        color:"white", 
-        width:"150px", 
-        height:"50px",
-        borderRadius: "25px", 
-        border:"none", 
-        backgroundColor:"#00d46a",
-        boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
-        fontSize: "15px",
-        resize: "none",
-        cursor:"pointer"
-        }}/>
-
-      <Link to="/list">
-      <button className="cancel"style={{
-        color:"white", 
-        width:"150px", 
-        height:"50px", 
-        borderRadius: "25px", 
-        border:"none", 
-        backgroundColor:"#d40000",
-        boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
-        fontSize: "15px",
-        cursor: "pointer"
-        }}>Cancel</button>
-=======
         <input
           type="submit"
           value="Submit"
           style={{
-            color: "black",
+            color: "white",
             width: "150px",
             height: "50px",
-            borderRadius: "20px",
+            borderRadius: "25px",
             border: "none",
             backgroundColor: "#00d46a",
+            boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
             fontSize: "15px",
             resize: "none",
+            cursor: "pointer",
           }}
         />
 
         <Link to="/list">
           <button
-            type="submit"
+            className="cancel"
             style={{
-              color: "black",
+              color: "white",
               width: "150px",
               height: "50px",
-              borderRadius: "20px",
+              borderRadius: "25px",
               border: "none",
               backgroundColor: "#d40000",
+              boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
               fontSize: "15px",
+              cursor: "pointer",
             }}
           >
             Cancel
           </button>
->>>>>>> Stashed changes
         </Link>
       </div>
 
