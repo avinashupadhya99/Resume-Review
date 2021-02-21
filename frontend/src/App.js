@@ -15,6 +15,17 @@ const App = () => {
   const [resumePosts, setResumePosts] = useState([]);
   const [users, setUsers] = useState([]);
 
+
+  // const data = {
+  //   id: 1234,
+  //   auth_provider: "Google",
+  // };
+  useEffect(() => {
+    axios.get(`http://104.211.49.83/resumes`).then((res) => {
+      console.log(res.data);
+      setResumePosts(res.data);
+    });
+  }, []);
   const dummyResumeList = [
     {
       pdfLink: "./images/sampleresume.jpg",
@@ -85,11 +96,6 @@ const App = () => {
     console.log("[App.js] New comment recieved");
   };
 
-  const handleResumeId = (id) => {
-    const res = dummyResumeList.find((x) => x.id == id);
-    return res;
-  };
-
   return (
     <Router>
       <div className="App">
@@ -109,13 +115,12 @@ const App = () => {
             ></Route>
             <Route
               path="/list"
-              render={() => <List resumePostList={dummyResumeList} />}
+              render={() => <List resumePostList={resumePosts} />}
             ></Route>
             <Route
               path="/view/:id"
               render={() => (
                 <View
-                  getResume={handleResumeId}
                   onNewComment={handleNewComment}
                 />
               )}
