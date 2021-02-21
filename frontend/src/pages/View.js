@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import sampleresume from "../images/sampleresume.jpg";
+import axios from "axios";
 
 import {
   Route,
@@ -20,100 +21,113 @@ import {
 import CommentSection from "../components/CommentSection";
 
 const View = ({ onNewComment, getResume }) => {
+  const [resume, setResume] = useState(null);
   let { id } = useParams();
-  const resume = getResume(id);
-  console.log(resume);
-  return (
-    <div className="view">
-      <div className="pad"></div>
-      <h1 className="resume-title">{resume.title}</h1>
-      <h1 className="resume-subtitle">Resume ID: {id}</h1>
-      <p className="resume-desc">{resume.description}</p>
-      <Magnifier
-        id="pdf"
-        imageSrc={sampleresume}
-        imageAlt="Example"
-        style={{
-          width: "500px",
-          display: "block",
-          marginLeft: "auto",
-          marginRight: "auto",
-          transform: "translateY(10%)",
-        }}
-      />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <form>
-        <textarea
-          id="comment"
-          placeholder="Leave a comment"
+  
+  useEffect(() => {
+    axios.get(`http://104.211.49.83/resume/${id}/details`).then((res) => {
+      console.log(res.data);
+      setResume(res.data);
+    }).catch((err) => {
+      console.log(err);
+      // TODO: Display 404
+    });
+  },[]);
+  if(resume) {
+    return (
+      <div className="view">
+        <div className="pad"></div>
+        <h1 className="resume-title">{resume.title}</h1>
+        <h1 className="resume-subtitle">Resume ID: {id}</h1>
+        <p className="resume-desc">{resume.description}</p>
+        <Magnifier
+          id="pdf"
+          imageSrc={sampleresume}
+          imageAlt="Example"
           style={{
-            color: "black",
             width: "500px",
-            height: "100px",
             display: "block",
             marginLeft: "auto",
             marginRight: "auto",
-            fontSize: "20px",
-            borderRadius: "10px",
-            padding: "10px",
-          }}
-        ></textarea>
-      </form>
-      <br />
-      <br />
-      <div className="view-btns">
-        <input
-          type="submit"
-          value="Submit"
-          style={{
-            color: "white",
-            width: "150px",
-            height: "50px",
-            borderRadius: "25px",
-            border: "none",
-            backgroundColor: "#00d46a",
-            boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
-            fontSize: "15px",
-            resize: "none",
-            cursor: "pointer",
+            transform: "translateY(10%)",
           }}
         />
-
-        <Link to="/list">
-          <button
-            className="cancel"
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <form>
+          <textarea
+            id="comment"
+            placeholder="Leave a comment"
+            style={{
+              color: "black",
+              width: "500px",
+              height: "100px",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+              fontSize: "20px",
+              borderRadius: "10px",
+              padding: "10px",
+            }}
+          ></textarea>
+        </form>
+        <br />
+        <br />
+        <div className="view-btns">
+          <input
+            type="submit"
+            value="Submit"
             style={{
               color: "white",
               width: "150px",
               height: "50px",
               borderRadius: "25px",
               border: "none",
-              backgroundColor: "#d40000",
+              backgroundColor: "#00d46a",
               boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
               fontSize: "15px",
+              resize: "none",
               cursor: "pointer",
             }}
-          >
-            Cancel
-          </button>
-        </Link>
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+          />
 
-      <CommentSection comments={resume.comments} />
-    </div>
-  );
+          <Link to="/list">
+            <button
+              className="cancel"
+              style={{
+                color: "white",
+                width: "150px",
+                height: "50px",
+                borderRadius: "25px",
+                border: "none",
+                backgroundColor: "#d40000",
+                boxShadow: "0 4px 7px rgba(0, 0, 0, 0.4)",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+            >
+              Cancel
+            </button>
+          </Link>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <CommentSection comments={resume.reviews} />
+      </div>
+    );
+  } else {
+    return <>Loading</>
+  }
 };
 
 export default View;
