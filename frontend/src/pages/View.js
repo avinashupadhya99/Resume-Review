@@ -52,9 +52,15 @@ const View = ({ getResume }) => {
     })
     .then(function (response) {
         //handle success
-        console.log(response);
+        console.log(response.data);
         // Clear fields
         setComment("");
+        // Create a copy of the state
+        let fresh_resume = resume;
+        // Update the copy
+        fresh_resume.reviews.push(response.data);
+        // Set the state
+        setResume(fresh_resume);
     })
     .catch(function (response) {
         //handle error
@@ -90,6 +96,9 @@ const View = ({ getResume }) => {
         <br />
         <br />
         <br />
+        {resume.reviews.map((data, i) => (
+          <Comment key={i} review={data} />
+        ))} 
         <form  onSubmit={handleSubmission}>
           <textarea
             id="comment"
@@ -155,9 +164,7 @@ const View = ({ getResume }) => {
         <br />
         <br />
 
-        {/* {resume.comments.map((data, i) => (
-          <Comment key={i} comment={data} />
-        ))} */}
+        
       </div>
     );
 

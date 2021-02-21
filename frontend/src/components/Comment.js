@@ -1,12 +1,12 @@
 import React from "react";
 
-const Comment = ({ comment }) => {
-  console.log("[Comment.js], data: ", comment);
+const Comment = ({ review }) => {
+  console.log("[Comment.js], data: ", review);
   return (
     <div className="comment-box">
       <h1></h1>
-      <p>{comment.text}</p>
-      <h4>{comment.timestamp}</h4>
+      <p>{review.review}</p>
+      <h4>{review.created_at}</h4>
     </div>
   );
 };
