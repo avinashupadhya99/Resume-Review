@@ -4,18 +4,16 @@ import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
 
 import logo from "../images/logo.png";
 
-/**
- * you can change the css to match the figma. i scrapped my progress and followed a tutorial just to get the links working first bc i wasted at least an hour on that
- * overall link structure should be okay
- */
 const CLIENT_ID =
   "956626273843-t281em1k26amkus44arum6lk434gr8su.apps.googleusercontent.com";
 
-const Navbar = ({ onSuccessfulLogin, onLogOut, user, loggedIn }) => {
-  const onLoginFailure = (res) => {
-    console.log("Login failed");
-  };
-
+const Navbar = ({
+  onSuccessfulLogin,
+  onFailedLogin,
+  onLogOut,
+  user,
+  loggedIn,
+}) => {
   return (
     <nav className="navbar">
       <Link className="navbar-title" to="/">
@@ -48,7 +46,7 @@ const Navbar = ({ onSuccessfulLogin, onLogOut, user, loggedIn }) => {
             clientId={CLIENT_ID}
             buttonText="Login"
             onSuccess={onSuccessfulLogin}
-            onFailure={onLoginFailure}
+            onFailure={onFailedLogin}
             cookiePolicy={"single_host_origin"}
             isSignedIn={false}
             render={(renderProps) => (

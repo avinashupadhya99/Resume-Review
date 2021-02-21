@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-/**
- * File upload page, require pdf format
- * allow them to tag the specific job industry or give comments about their goals
- * have to take the file upload and pass it to the database
- */
-
-const Upload = () => {
+const Upload = ({ onSubmit }) => {
+  /**
+   * TODO
+   * add onClick to submit button after khiem makes it
+   */
   const [file, setFile] = useState("");
 
   const onChangeFile = (e) => {
@@ -23,7 +21,7 @@ const Upload = () => {
         name="file"
         className="file"
         id="file"
-        accept=".pdf"
+        accept="application/pdf"
         onChange={onChangeFile}
         style={{ display: "none" }}
       />
