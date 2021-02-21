@@ -79,8 +79,4 @@ def new_review():
 @app.route('/resumes')
 def resumes():
     resumes = get_resumes()
-
-    for resume in resumes:
-        print(resume.review)
-
     return jsonify([i.serialize for i in resumes])

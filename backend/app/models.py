@@ -7,7 +7,7 @@ import os
 Base = declarative_base()
 
 engine = create_engine(
-    'cockroachdb://{}:{}@{}:26257/{}.resume_dev?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
+    'cockroachdb://{}:{}@{}:26257/{}.resume?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
     echo=True                   # Log SQL queries to stdout
 )
 
@@ -66,7 +66,8 @@ class Resume(Base):
             'user_id'     : self.user_id,
             'title'       : self.title,
             'description' : self.description,
-            'tags'        : str(self.tags),
+            'tags'        : self.tags,
+            'reviews'     : [i.serialize for i in self.reviews],
             'created_at'  : dump_date(self.created_at),
             'updated_at'  : dump_date(self.updated_at)
         }

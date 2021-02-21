@@ -8,7 +8,7 @@ from app.models import Resume, Review, User
 Base = declarative_base()
 
 engine = create_engine(
-    'cockroachdb://{}:{}@{}:26257/{}.resume_dev?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
+    'cockroachdb://{}:{}@{}:26257/{}.resume?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
     echo=True                   # Log SQL queries to stdout
 )
 
