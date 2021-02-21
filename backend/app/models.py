@@ -1,13 +1,13 @@
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, DateTime, ForeignKey, Integer, LargeBinary, String, Table
+from sqlalchemy import create_engine, ARRAY, Column, DateTime, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
 import os
 
 Base = declarative_base()
 
 engine = create_engine(
-    'cockroachdb://{}:{}@{}:26257/{}.resume?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
+    'cockroachdb://{}:{}@{}:26257/{}.resume_dev?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
     echo=True                   # Log SQL queries to stdout
 )
 
@@ -44,20 +44,29 @@ class Resume(Base):
     __tablename__ = 'resume'
     id      = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), unique=True)
+    title = Column(String(50))
+    description = Column(String(150))
+    tags = Column(ARRAY(String))
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, default=datetime.now())
     reviews = relationship("Review", backref="resume")
 
-    def __init__(self, created_at, user_id):
+    def __init__(self, created_at, title, description, tags, user_id):
         self.created_at = created_at
         self.user_id = user_id
+        self.title = title
+        self.description = description
+        self.tags = tags
         pass
 
     @property
     def serialize(self):
         return {
-            'id'         : self.id,
-            'user_id'    : self.user_id,
+            'id'          : self.id,
+            'user_id'     : self.user_id,
+            'title'       : self.title,
+            'description' : self.description,
+            'tags'        : str(self.tags),
             'created_at'  : dump_date(self.created_at),
             'updated_at'  : dump_date(self.updated_at)
         }

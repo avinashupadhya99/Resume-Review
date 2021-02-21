@@ -8,7 +8,7 @@ from app.models import Resume, Review, User
 Base = declarative_base()
 
 engine = create_engine(
-    'cockroachdb://{}:{}@{}:26257/{}.resume?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
+    'cockroachdb://{}:{}@{}:26257/{}.resume_dev?sslmode=verify-full&sslrootcert={}'.format(os.environ['username'], os.environ['password'], os.environ['globalhost'], os.environ['cluster'], os.environ['certpath']),
     echo=True                   # Log SQL queries to stdout
 )
 
@@ -34,16 +34,19 @@ def create_users(user):
     session.commit()
     return new_user
 
-def add_resume(user_id):
+def add_resume(resume):
+    print(resume['tags'])
     factory = sessionmaker(bind=engine)
     session = factory()
     # Query to find if there is an existing resume record for the user
-    existing_resume = session.query(Resume).filter_by(user_id=user_id).first()
+    existing_resume = session.query(Resume).filter_by(user_id=resume['user_id']).first()
     # Create resume record if there is no existing record
     if existing_resume is None:
-        new_resume = Resume(user_id=user_id, created_at=datetime.now())
+        new_resume = Resume(user_id=resume['user_id'], title=resume['title'], description=resume['description'], tags=resume['tags'], created_at=datetime.now())
         session.add(new_resume)
     else:
+        # TODO: Check for title, description and tags in the body
+
         # Set the updated_at to the current datetime
         existing_resume.updated_at = datetime.now()
     session.commit()

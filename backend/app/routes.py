@@ -47,13 +47,14 @@ def new_users():
 @app.route('/resume/add', methods=['POST'])
 def resume_add():
     resume_file = request.files['file']
-    user_id = request.form['user_id']
+    form_data = request.form
+    user_id = form_data['user_id']
     f = request.files['file']
     resume_file.save(f"{UPLOAD_FOLDER}/{user_id}.pdf")
     upload_file(f"{UPLOAD_FOLDER}/{user_id}.pdf", BUCKET)
 
     try:
-        resume = add_resume(user_id)
+        resume = add_resume(form_data)
         return jsonify(resume.serialize)
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
