@@ -19,9 +19,28 @@ import {
 } from "react-image-magnifiers";
 import CommentSection from "../components/CommentSection";
 
-const View = () => {
+const View = ({ onNewComment }) => {
   let { id } = useParams();
   const resume = {
+    pdfLink: "./images/sampleresume.jpg",
+    title: "3rd year grad student at UCLA",
+    description: "Hey! I'm looking for feedback on my resume",
+    tags: ["premed", "bio", "research"],
+    timestamp: new Date(),
+    userId: 2,
+    comments: [
+      {
+        userId: 1,
+        timestamp: new Date(),
+        text: "there's too much whitespace",
+      },
+      {
+        userId: 3,
+        timestamp: new Date(),
+        text: "use less bullet points",
+      },
+    ],
+
     /**
      *TODO
      */
@@ -31,8 +50,7 @@ const View = () => {
     <div className="view">
       <div className="pad"></div>
       {/** need the database before we can fill */}
-      <h1>Resume #1</h1>
-      <h1>{id}</h1>
+      <h1>Resume #{id}</h1>
       <SideBySideMagnifier
         id="pdf"
         imageSrc={sampleresume}
@@ -119,7 +137,7 @@ const View = () => {
       <br />
       <br />
 
-      {/* <CommentSection comments={resume.comments} /> */}
+      <CommentSection comments={resume.comments} />
     </div>
   );
 };

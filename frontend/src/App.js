@@ -16,14 +16,6 @@ const App = () => {
 
   /**
    * TODO
-   * get username
-   */
-  const getUsername = (userId) => {
-    return 0;
-  };
-
-  /**
-   * TODO
    * use axios or fetch to get database
    * populate resumePost objects
    */
@@ -37,6 +29,7 @@ const App = () => {
       tags: ["premed", "bio", "research"],
       timestamp: new Date(),
       userId: 2,
+      id: 5,
       comments: [
         {
           userId: 1,
@@ -57,6 +50,7 @@ const App = () => {
       tags: ["stem", "software engineering", "computer science"],
       timestamp: new Date(),
       userId: 3,
+      id: 4,
       comments: [
         {
           userId: 2,
@@ -66,6 +60,7 @@ const App = () => {
       ],
     },
   ];
+  console.log("[App.js] Resume Posts List in App.js:", dummyResumeList);
 
   const handleSuccessfulLogin = (res) => {
     setCurrentUser(res.profileObj);
@@ -76,15 +71,16 @@ const App = () => {
   const handleLogout = () => {
     setCurrentUser({});
     setLoggedIn(false);
-    console.log("Successfully logged out.");
+    console.log("[App.js] Successfully logged out.");
   };
 
   const handleFailedLogin = (res) => {
-    console.log("Login Failed: ", res);
+    console.log("[App.js] Login Failed: ", res);
     setLoggedIn(false);
   };
 
   const handleNewResumePost = (resume) => {
+    console.log("[App.js] New post submitted ");
     /**
      * add the resume into our database
      * TODO
@@ -96,7 +92,7 @@ const App = () => {
      * TODO
      * add comment into resume post in database
      */
-    console.log("new comment");
+    console.log("[App.js] New comment recieved");
   };
 
   return (
@@ -109,7 +105,6 @@ const App = () => {
           user={currentUser}
           loggedIn={loggedIn}
         />
-        {/* <p> {currentUser.googleId} </p> */}
         <div className="content">
           <Switch>
             <Route exact path="/" component={Home}></Route>
@@ -121,8 +116,10 @@ const App = () => {
               path="/list"
               render={() => <List resumePostList={dummyResumeList} />}
             ></Route>
-            <Route path="/test/:prop" component={View}></Route>
-            <Route path="/view/:id" children={<View />}></Route>
+            <Route
+              path="/view/:id"
+              render={() => <View onNewComment={handleNewComment} />}
+            ></Route>
             <Route component={Invalid}></Route>
           </Switch>
         </div>
