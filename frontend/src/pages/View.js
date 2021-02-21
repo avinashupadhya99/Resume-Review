@@ -110,7 +110,6 @@ const View = ({ onNewComment, getResume }) => {
         <br />
         <br />
 
-        <CommentSection comments={resume.reviews} />
       </div>
     );
   } else {
