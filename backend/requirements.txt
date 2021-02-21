@@ -5,3 +5,4 @@ sqlalchemy-cockroachdb
 psycopg2
 boto3
 flask-swagger-ui
+flask-cors

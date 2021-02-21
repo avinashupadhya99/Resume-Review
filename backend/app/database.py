@@ -71,3 +71,9 @@ def get_resumes():
     session = factory()
     resumes = session.query(Resume).all()
     return resumes
+
+def get_resume_by_id(id):
+    factory = sessionmaker(bind=engine)
+    session = factory()
+    resume = session.query(Resume).get(id)
+    return resume
