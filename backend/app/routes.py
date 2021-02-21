@@ -1,8 +1,8 @@
 from app import app
 import json
-from app.database import add_resume, create_review, create_users, get_resumes, get_users, get_user_by_id
+from app.database import add_resume, create_review, create_users, get_resumes, get_users, get_resume_by_id, get_user_by_id
 from app.s3 import download_file, upload_file
-from flask import jsonify, request
+from flask import jsonify, request, send_file
 from sqlalchemy.exc import SQLAlchemyError
 
 UPLOAD_FOLDER = "uploads"
@@ -33,7 +33,7 @@ def get_user(id):
             return jsonify({"error": "User not found"}), 404
     except Exception as e:
         print(e)
-        msg = "Internal error while fetching all users"
+        msg = "Internal error while fetching user"
         return jsonify({"error": msg}), 500
 
 @app.route('/users/new', methods=['POST'])
@@ -64,7 +64,7 @@ def resume_add():
         user_id = form_data['user_id']
         f = request.files['file']
         resume_file.save(f"{UPLOAD_FOLDER}/{user_id}.pdf")
-        upload_file(f"{UPLOAD_FOLDER}/{user_id}.pdf", BUCKET)
+        upload_file(f"{UPLOAD_FOLDER}/{user_id}.pdf", f"{user_id}.pdf", BUCKET)
     except Exception as e:
         print(e)
         msg = "Internal error while adding resume"
@@ -102,4 +102,34 @@ def resumes():
     except Exception as e:
         print(e)
         msg = "Internal error while fetching all resumes"
+        return jsonify({"error": msg}), 500
+
+@app.route('/resume/<int:id>/file')
+def get_resume_file(id):
+    try:
+        resume = get_resume_by_id(id)
+        if resume is not None:
+            user_id = resume.user_id
+            print(user_id)
+            resume_file_location = download_file(f"{user_id}.pdf", BUCKET)
+            return send_file(f"/resume-review/downloads/{user_id}.pdf")
+            # TODO: Set up a cron job to clean the data
+        else:
+            return jsonify({"error": "Resume not found"}), 404
+    except Exception as e:
+        print(e)
+        msg = "Internal error while fetching resume"
+        return jsonify({"error": msg}), 500
+        
+@app.route('/resume/<int:id>/details')
+def get_resume_details(id):
+    try:
+        resume = get_resume_by_id(id)
+        if resume is not None:
+            return jsonify(resume.serialize)
+        else:
+            return jsonify({"error": "Resume not found"}), 404
+    except Exception as e:
+        print(e)
+        msg = "Internal error while fetching resume"
         return jsonify({"error": msg}), 500
