@@ -12,7 +12,7 @@
 
 body {
   /*overflow: hidden;*/
-  background-color: #E6CCB2
+  background-color: #e6ccb2;
   /* Hide scrollbars */
 }
 
@@ -44,7 +44,6 @@ form {
 .navbar-title {
   font-size: x-large;
 }
-
 .navbar {
   padding: 10px;
   display: flex;
@@ -127,13 +126,20 @@ form {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition: transform .2s ease-out;
+  transition: transform 0.2s ease-out;
 }
 
-.upload>label:hover {
+.upload > label:hover {
   transform: scale(1.02);
 }
 
+<<<<<<< Updated upstream
+=======
+input:hover + label {
+  transform: scale(1.02);
+}
+
+>>>>>>> Stashed changes
 .content {
   margin: 0;
   max-width: 100%;
@@ -153,6 +159,7 @@ form {
   margin-right: 30%;
 }
 
+<<<<<<< Updated upstream
 .cancel {
   transition: transform .2s ease-out;
 }
@@ -160,3 +167,14 @@ form {
 .cancel:hover {
   transform: scale(1.02);
 }
+=======
+form {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pad {
+  height: 100px;
+}
+>>>>>>> Stashed changes
