@@ -7,21 +7,23 @@ import { Link, useParams } from "react-router-dom";
 import { Magnifier } from "react-image-magnifiers";
 import Comment from "../components/Comment";
 
-
 const View = ({ onNewComment, getResume }) => {
-  const [resume, setResume] = useState(null);
+  const [resume, setResume] = useState({});
   let { id } = useParams();
-  
+
   useEffect(() => {
-    axios.get(`http://104.211.49.83/resume/${id}/details`).then((res) => {
-      console.log(res.data);
-      setResume(res.data);
-    }).catch((err) => {
-      console.log(err);
-      // TODO: Display 404
-    });
-  },[]);
-  if(resume) {
+    axios
+      .get(`http://104.211.49.83/resume/${id}/details`)
+      .then((res) => {
+        console.log(res.data);
+        setResume(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        // TODO: Display 404
+      });
+  }, []);
+  if (resume) {
     return (
       <div className="view">
         <div className="pad"></div>
@@ -109,11 +111,14 @@ const View = ({ onNewComment, getResume }) => {
         <br />
         <br />
         <br />
-
+        {resume.comments.map((data, i) => (
+          <Comment key={i} comment={data} />
+        ))}
       </div>
     );
   } else {
     return <>Loading</>
+    return <>Loading</>;
   }
 };
 
