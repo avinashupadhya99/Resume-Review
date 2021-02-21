@@ -1,25 +1,12 @@
 import React from "react";
 import sampleresume from "../images/sampleresume.jpg";
 
-import {
-  Route,
-  BrowserRouter as Router,
-  Link,
-  Switch,
-  useParams,
-} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import {
-  Magnifier,
-  GlassMagnifier,
-  SideBySideMagnifier,
-  PictureInPictureMagnifier,
-  MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION,
-} from "react-image-magnifiers";
-import CommentSection from "../components/CommentSection";
+import { Magnifier } from "react-image-magnifiers";
+import Comment from "../components/Comment";
 
-const View = ({ onNewComment, getResume }) => {
+const View = ({ getResume }) => {
   let { id } = useParams();
   const resume = getResume(id);
   console.log(resume);
@@ -45,6 +32,10 @@ const View = ({ onNewComment, getResume }) => {
       <br />
       <br />
       <br />
+
+      {resume.comments.map((data, i) => (
+        <Comment key={i} comment={data} />
+      ))}
       <br />
       <br />
       <br />
@@ -104,14 +95,6 @@ const View = ({ onNewComment, getResume }) => {
           </button>
         </Link>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <CommentSection comments={resume.comments} />
     </div>
   );
 };

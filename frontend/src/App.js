@@ -15,16 +15,6 @@ const App = () => {
   const [resumePosts, setResumePosts] = useState([]);
   const [users, setUsers] = useState([]);
 
-  // const data = {
-  //   id: 1234,
-  //   auth_provider: "Google",
-  // };
-  // useEffect(() => {
-  //   axios.get(`http://104.211.49.83/users/new`).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }, []);
-
   const dummyResumeList = [
     {
       pdfLink: "./images/sampleresume.jpg",
