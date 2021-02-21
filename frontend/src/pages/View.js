@@ -2,23 +2,11 @@ import React, { useState, useEffect } from "react";
 import sampleresume from "../images/sampleresume.jpg";
 import axios from "axios";
 
-import {
-  Route,
-  BrowserRouter as Router,
-  Link,
-  Switch,
-  useParams,
-} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import {
-  Magnifier,
-  GlassMagnifier,
-  SideBySideMagnifier,
-  PictureInPictureMagnifier,
-  MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION,
-} from "react-image-magnifiers";
-import CommentSection from "../components/CommentSection";
+import { Magnifier } from "react-image-magnifiers";
+import Comment from "../components/Comment";
+
 
 const View = ({ onNewComment, getResume }) => {
   const [resume, setResume] = useState(null);

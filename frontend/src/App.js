@@ -15,6 +15,7 @@ const App = () => {
   const [resumePosts, setResumePosts] = useState([]);
   const [users, setUsers] = useState([]);
 
+
   // const data = {
   //   id: 1234,
   //   auth_provider: "Google",
@@ -25,7 +26,6 @@ const App = () => {
       setResumePosts(res.data);
     });
   }, []);
-
   const dummyResumeList = [
     {
       pdfLink: "./images/sampleresume.jpg",
