@@ -170,6 +170,7 @@ form {
 
 #item-list {
   color: black;
+  margin-top: 8px;
 }
 #item-list ul {
   padding: 0;
@@ -178,6 +179,9 @@ form {
   color: #555;
 }
 
+.items {
+  margin-top: 5%;
+}
 #item-list ul > li {
   list-style: none;
   border: 3px solid #ddd;
