@@ -1,1 +1,7 @@
 flask
+gunicorn
+sqlalchemy
+sqlalchemy-cockroachdb
+psycopg2
+boto3
+flask-swagger-ui

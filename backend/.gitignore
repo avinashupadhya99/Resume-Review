@@ -1,2 +1,5 @@
 venv
 app/__pycache__
+uploads/*
+!uploads/.keep
+.env
