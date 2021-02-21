@@ -44,6 +44,7 @@ form {
 .navbar-title {
   font-size: x-large;
 }
+
 .navbar {
   padding: 10px;
   display: flex;
@@ -128,7 +129,7 @@ form {
   transition: transform 0.2s ease-out;
 }
 
-.upload > label:hover {
+.upload>label:hover {
   transform: scale(1.02);
 }
 
@@ -158,6 +159,7 @@ form {
 .cancel:hover {
   transform: scale(1.02);
 }
+
 form {
   display: block;
   margin-left: auto;
@@ -171,14 +173,17 @@ form {
 #item-list {
   color: black;
 }
+
 #item-list ul {
   padding: 0;
-  margin-left: 10%;
-  width: 80%;
   color: #555;
 }
 
-#item-list ul > li {
+.item {
+  text-align: center;
+}
+
+#item-list ul>li {
   list-style: none;
   border: 3px solid #ddd;
   display: block;
@@ -187,9 +192,10 @@ form {
 }
 
 .button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   padding: 8px 12px;
-  margin-left: 60px;
-  margin-top: 10px;
   font-size: 14px;
   background: rgb(104, 142, 203);
   display: block;
@@ -198,6 +204,7 @@ form {
   cursor: pointer;
   text-decoration: none;
 }
+
 .button:hover {
   transition-duration: 0.5s;
   background: rgb(144, 105, 217);
@@ -213,13 +220,6 @@ form {
 span {
   font-size: 14px;
   color: black;
-}
-
-.icon {
-  height: 50px;
-  width: 50px;
-  float: left;
-  margin: 0 15px 0 0;
 }
 
 .resume-title {

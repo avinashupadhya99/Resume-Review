@@ -8,10 +8,11 @@ const ListItem = ({ resume }) => {
       <div className="search"></div>
       <ul>
         <li>
-          <div className="expand">
-            <div className="icon london"></div>
-            <h2 className="list-title">{resume.title}</h2>
-            <span>{resume.description}</span>
+          <div className="item">
+              <h2 className="list-title">{resume.title}</h2>
+              <span>{resume.description}</span>
+            <br/>
+            <br/>
             <Link className="button" to={`/view/${resume.id}`}>
               View Resume
             </Link>
