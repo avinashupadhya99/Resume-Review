@@ -37,11 +37,15 @@ const Upload = ({ onSubmit }) => {
           //handle success
           console.log(response);
           // Clear fields
+          setTitle("");
+          setDescription("");
+          setTags("");
+          // TODO: Display succes message
       })
       .catch(function (response) {
           //handle error
           console.log(response);
-          // Display error message
+          // TODO: Display error message
       });
   }
 
@@ -58,6 +62,7 @@ const Upload = ({ onSubmit }) => {
           accept="application/pdf"
           onChange={onChangeFile}
           style={{ display: "none" }}
+          required
         />
         <label htmlFor="file">Select File</label>
         {/* <h2>{file}</h2> */}
@@ -84,7 +89,9 @@ const Upload = ({ onSubmit }) => {
             borderRadius: "10px",
             padding: "10px",
           }}
+          value={title}
           onChange={e => setTitle(e.target.value)}
+          required
         ></textarea>
 
       <br />
@@ -106,7 +113,9 @@ const Upload = ({ onSubmit }) => {
             borderRadius: "10px",
             padding: "10px",
           }}
+          value={description}
           onChange={e => setDescription(e.target.value)}
+          required
         ></textarea>
 
       <br />
@@ -128,7 +137,9 @@ const Upload = ({ onSubmit }) => {
             borderRadius: "10px",
             padding: "10px",
           }}
+          value={tags}
           onChange={e => setTags(e.target.value)}
+          required
         ></textarea>
 
         <br />
