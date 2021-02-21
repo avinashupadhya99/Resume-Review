@@ -6,10 +6,9 @@ const CommentSection = ({ comments }) => {
 
   return (
     <div className="comment-section">
-      {comments.map((data, i) => {
-        console.log(data, i);
-        <Comment key={i} comment={data} />;
-      })}
+      {comments.map((data, i) => (
+        <Comment key={i} comment={data} />
+      ))}
     </div>
   );
 };

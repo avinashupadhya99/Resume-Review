@@ -6,7 +6,6 @@ import Invalid from "./pages/Invalid";
 import Navbar from "./components/Navbar";
 import Upload from "./pages/Upload";
 import List from "./pages/List";
-import CommentSection from "./components/CommentSection";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -27,18 +26,18 @@ const App = () => {
       title: "3rd year grad student at UCLA",
       description: "Hey! I'm looking for feedback on my resume",
       tags: ["premed", "bio", "research"],
-      timestamp: new Date(),
+      // timestamp: new Date(),
       userId: 2,
       id: 5,
       comments: [
         {
           userId: 1,
-          timestamp: new Date(),
+          // timestamp: new Date(),
           text: "there's too much whitespace",
         },
         {
           userId: 3,
-          timestamp: new Date(),
+          // timestamp: new Date(),
           text: "use less bullet points",
         },
       ],
@@ -48,13 +47,13 @@ const App = () => {
       title: "Sophmore CS Major at UCSD",
       description: "Hey! I'm looking for feedback on my resume",
       tags: ["stem", "software engineering", "computer science"],
-      timestamp: new Date(),
+      // timestamp: new Date(),
       userId: 3,
       id: 4,
       comments: [
         {
           userId: 2,
-          timestamp: new Date(),
+          // timestamp: new Date(),
           text: "nice resume",
         },
       ],
@@ -95,6 +94,11 @@ const App = () => {
     console.log("[App.js] New comment recieved");
   };
 
+  const handleResumeId = (id) => {
+    const res = dummyResumeList.find((x) => x.id == id);
+    return res;
+  };
+
   return (
     <Router>
       <div className="App">
@@ -118,7 +122,12 @@ const App = () => {
             ></Route>
             <Route
               path="/view/:id"
-              render={() => <View onNewComment={handleNewComment} />}
+              render={() => (
+                <View
+                  getResume={handleResumeId}
+                  onNewComment={handleNewComment}
+                />
+              )}
             ></Route>
             <Route component={Invalid}></Route>
           </Switch>

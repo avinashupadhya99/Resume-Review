@@ -1,7 +1,7 @@
 import React from "react";
 
 const Comment = ({ comment }) => {
-  console.log("In Comment with props:", comment);
+  console.log("[Comment.js], data: ", comment);
   return (
     <div className="comment-box">
       <h1></h1>
