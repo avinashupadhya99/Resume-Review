@@ -1,5 +1,136 @@
-openapi: 3.0.0
+swagger: "2.0"
 info:
-  version: '1.0.0'
-  title: 'Resume Review'
-  description: 'Backend for Resume Review'
+  description: "This is the backend server for ResReviewr.  You can find the frontend at [ResReview](https://resume-review.netlify.app/) "
+  version: "1.0.0"
+  title: "Resume Review"
+host: "104.211.49.83"
+basePath: "/"
+tags:
+
+- name: "user"
+  description: "Operations about user"
+schemes:
+- "http"
+paths:
+  /user/new:
+    post:
+      tags:
+      - "user"
+      summary: "Register a new user with the backend"
+      description: ""
+      operationId: "addUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "500":
+          description: "Internal error"
+
+  /users:
+    get:
+      tags:
+      - "user"
+      summary: "Get all users"
+      description: "Get a list of all users"
+      operationId: "getAllUsers"
+      produces:
+      - "application/json"
+
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        "500":
+          description: "Internal error"
+  /user/{userId}:
+    get:
+      tags:
+      - "user"
+      summary: "Find pet by ID"
+      description: "Returns a single user"
+      operationId: "getPetById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "ID of user to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "User not found"
+
+
+
+
+
+definitions:
+  Resume:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      user_id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      created_at:
+        type: "string"
+        format: "date-time"
+        
+      complete:
+        type: "boolean"
+        default: false
+
+  Review:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      user_id:
+        type: "integer"
+        format: "int64"
+      resume_id:
+        type: "integer"
+        format: "int64"
+      review:
+        type: "string"
+      created_at:
+        type: "string"
+        format: "date-time"
+
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      auth_provider:
+        type: "string"
+        description: "Auth provider"
+
